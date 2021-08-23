@@ -222,6 +222,7 @@ namespace ServeRest
             Client("http://localhost:3000/");
             Endpoint("/usuarios");
             Get();
+
             StatusCode(200);
             ReturnText(4, "Fulano da Silva");
         }
@@ -309,6 +310,27 @@ namespace ServeRest
             Get();
             StatusCode(200);
             ReturnPesquisaProdutosID();
+        }
+
+        [Test]
+        public void PesquisaCarrinhos()
+
+        {
+            /*JObject obs = JObject.Parse(resp.Content);
+            Console.WriteLine(obs);*/
+
+            // arrange
+            RestClient client = new RestClient("http://localhost:3000");
+            RestRequest request = new RestRequest("/carrinhos", Method.GET);
+
+            // act
+            IRestResponse response = client.Execute(request);
+
+
+            // assert
+            //var mensagemRetorno = obs["message"].ToString();
+            //Assert.AreEqual(mensagemRetorno, mensagem);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
         }
 
 
